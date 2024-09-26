@@ -48,11 +48,11 @@ jobs:
 
           # Change to the target repo directory
           cd gh-pages-repo/
-          
+
           # Check if the gh-pages branch exists; if not, create it
           git checkout -B gh-pages
 
           # Add, commit and push changes
           git add .
           git commit -m "Update report" || echo "No changes to commit"
-          git push --force https://sabbir-of:${{ secrets.GH_TOKEN }}@github.com/sabbir-of/playwright-report.git gh-pages:gh-pages
+          git push --force https://x-access-token:${{ secrets.GH_TOKEN }}@github.com/sabbir-of/playwright-report.git gh-pages:gh-pages
