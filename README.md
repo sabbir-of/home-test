@@ -21,7 +21,7 @@ Home Test - This project is based on Microsoft Playwright, which enables reliabl
 - Parallel execution
 - Rerun only failed features
 - Retry failed tests on CI
-- Github Actions integrated with publish report to [github pages](https://sabbir-of.github.io/playwright-report/) 
+- Github Actions integrated with publish report to [github pages](https://sabbir-of.github.io/PlaywrightReport/) 
 - Page object model
 
 ## Tech Stack/Libraries Used
@@ -82,8 +82,8 @@ Home Test - This project is based on Microsoft Playwright, which enables reliabl
     
     > npm run report
     > 
-- Or If you want to run this in with github action then navigate to the actions tab open a build and click on the "Re-run all the jobs"
-    > Then view the updated report to [github pages](https://sabbir-of.github.io/playwright-report/)
+- If you want to run this with GitHub Actions, navigate to the Actions tab, open a build, and click on "Re-run all jobs". 
+    > Then, you can view the updated report at [github pages](https://sabbir-of.github.io/PlaywrightReport/)
     >
 
 

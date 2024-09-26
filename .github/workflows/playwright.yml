@@ -38,13 +38,13 @@ jobs:
           git config --global user.email "sabbir.of@gmail.com"
           
           # Clone the target repo
-          git clone --branch gh-pages https://github.com/sabbir-of/playwright-report.git gh-pages-repo/
+          git clone --branch gh-pages https://github.com/sabbir-of/PlaywrightReport.git gh-pages-repo/
 
           # Remove existing files in the target repo to avoid conflicts
           Remove-Item -Recurse -Force gh-pages-repo/*
 
           # Copy the report to the target repo
-          cp -r ${{ github.workspace }}/generated-report/* gh-pages-repo/  # Adjust the path to your report
+          cp -r ${{ github.workspace }}/generated-report/* gh-pages-repo/ 
 
           # Change to the target repo directory
           cd gh-pages-repo/
@@ -55,4 +55,4 @@ jobs:
           # Add, commit and push changes
           git add .
           git commit -m "Update report" || echo "No changes to commit"
-          git push --force https://x-access-token:${{ secrets.GH_TOKEN }}@github.com/sabbir-of/playwright-report.git gh-pages:gh-pages
+          git push --force https://x-access-token:${{ secrets.GH_TOKEN }}@github.com/sabbir-of/PlaywrightReport.git gh-pages:gh-pages
