@@ -1,65 +1,8 @@
-<h1 text-align="center">Automation-Testing-lifecycle</h1>
-
-The software automation testing lifecycle using Playwright with TypeScript generally follows a structured process that ensures comprehensive test coverage, efficient test execution, and reliable results. Here’s an outline of the lifecycle:
-
-### 1. **Test Planning**
-   - **Requirement Analysis:** Understand the application under test (AUT) and gather all the functional and non-functional requirements.
-   - **Test Strategy Development:** Define the overall testing approach, including the scope, objectives, resources, timelines, and deliverables.
-   - **Tool Selection:** Choose Playwright as the automation tool, and TypeScript as the programming language for writing test scripts.
-
-### 2. **Test Design**
-   - **Test Case Design:** Identify and design the test cases based on the requirements. Categorize them into different test suites (e.g., smoke tests, regression tests).
-   - **Test Data Preparation:** Create or identify the necessary test data required for executing the test cases.
-   - **Framework Setup:** Set up a test automation framework with Playwright and TypeScript. This might include setting up folder structures, configuration files, and dependencies (`package.json`).
-   - **Test Environment Setup:** Configure the environment where tests will be executed, which might involve setting up browsers, devices, or virtual machines.
-
-### 3. **Test Script Development**
-   - **Test Script Writing:** Write the test scripts in TypeScript using Playwright’s API. This involves creating functions, page objects, and reusable components to make scripts maintainable.
-   - **Test Script Review:** Review the test scripts to ensure they are aligned with the test cases and follow best coding practices.
-   - **Test Script Versioning:** Commit the test scripts to a version control system like GitHub, ensuring that changes are tracked.
-
-### 4. **Test Execution**
-   - **Test Execution Planning:** Define the test execution strategy, including the sequence of test runs, test environments, and any parallel execution strategies.
-   - **Trigger Test Execution:** Run the tests using Playwright’s CLI or integrate the execution with CI/CD pipelines (e.g., GitHub Actions, CircleCI).
-   - **Monitor Execution:** Monitor the test runs to identify any issues during execution, such as environment failures or flaky tests.
-
-### 5. **Test Reporting**
-   - **Generate Reports:** After test execution, generate detailed reports using tools like Allure or Playwright’s built-in reporting capabilities. These reports should include test case results, screenshots, logs, and error traces.
-   - **Analyze Results:** Analyze the results to identify patterns of failure, test coverage gaps, and areas for improvement.
-
-### 6. **Test Maintenance**
-   - **Test Script Maintenance:** Regularly update the test scripts to accommodate changes in the application under test, such as new features, UI changes, or updates in dependencies.
-   - **Handle Flaky Tests:** Identify and fix flaky tests to ensure consistent test results.
-   - **Refactor Test Scripts:** Optimize and refactor test scripts for better performance and maintainability.
-
-### 7. **Continuous Integration and Continuous Testing**
-   - **CI/CD Integration:** Integrate the Playwright tests into a CI/CD pipeline to ensure that tests run automatically with every code change, providing quick feedback to the development team.
-   - **Continuous Monitoring:** Implement continuous monitoring of the test results to quickly detect any issues in the automation process or the application.
-   - **Integration With Slack/Teams:** After completing continuous integration, a report summary is sent to Slack or Teams using an incognito webhook with an attached report URL.
-
-   ![Slack report](image-1.png)
-   ![Teams report](image-2.png)
-   
-
-### 8. **Test Closure**
-   - **Test Summary Report:** Prepare a final test summary report that includes key metrics like test coverage, defect density, and pass/fail rates.
-   - **Test Artifacts Archiving:** Archive all test artifacts, including test scripts, reports, logs, and screenshots, for future reference.
-   - **Lessons Learned:** Conduct a retrospective to discuss what went well, what didn’t, and how the automation process can be improved in future cycles.
-
-### 9. **Feedback and Improvement**
-   - **Continuous Feedback:** Gather feedback from stakeholders, developers, and testers to continuously improve the test automation process.
-   - **Process Improvement:** Identify areas of improvement in the test automation lifecycle, such as enhancing the framework, optimizing test execution time, or increasing test coverage.
-
-This lifecycle is iterative and should be revisited regularly to ensure the automation process evolves with the application and the team’s needs.
-
-
-
-
 <h1 text-align="center">Playwright-Project-Setup</h1>
 
 ## Introduction
 
-Playwright-Framework-Template - This project is based on Microsoft Playwright, which enables reliable end-to-end testing, Web testing.
+Home Test - This project is based on Microsoft Playwright, which enables reliable end-to-end testing for modern web apps.
 
 
 ## Features
@@ -75,6 +18,11 @@ Playwright-Framework-Template - This project is based on Microsoft Playwright, w
 - Support taking screenshots
 - Support Serial and Parallel execution
 - Environment configuration using .env files
+- Parallel execution
+- Rerun only failed features
+- Retry failed tests on CI
+- Github Actions integrated with publish report to [github pages](https://sabbir-of.github.io/playwright-report/) 
+- Page object model
 
 ## Tech Stack/Libraries Used
 
@@ -89,15 +37,26 @@ Playwright-Framework-Template - This project is based on Microsoft Playwright, w
 ## Project Structure
 **Project Structure**
 
-- `helper`
-    - `/web/webHelper.ts` contains functions for interacting with browser
-- `tests` contains utility functions
-    - `web` place to web tests
-- `utils` contains utility functions
-    - `config` contains config files
-    - `report` contains report function files
-    - `dataStore.js` acts as a in-memory data store. It is used to save data that needs to be shared between different test case
-- `test-results` contains test results
+/project-root
+│
+├── /fixtures
+│   └── BDDFixture.ts            # Setup and teardown logic for BDD tests
+│
+├── /pages
+│   └── yourPage.page.ts         # Page object extending BasePage with shared methods
+│
+├── /helpers
+│   └── webhelper.ts             # Helper functions for various utilities in tests
+│
+├── /features
+│   └── yourfeature.feature       # Gherkin feature file defining scenarios
+│
+├── /steps
+│   └── yourTest.steps.ts        # Step definitions mapping to feature file steps
+│
+└── /utils
+    └── additionalHelpers.ts      # Optional: Additional utility functions if needed
+
 
 ### Prerequisite
 
@@ -109,18 +68,52 @@ Playwright-Framework-Template - This project is based on Microsoft Playwright, w
 
 - - clone the repo using below URL
     
+    > https://github.com/sabbir-of/home-test.git
     > 
-    > 
-- If you want to run this on your local machine, git clone the repo to local. In the main directory run the below commands. This will install playwright dependencies on your machine.:
+- Run this on your local machine, git clone the repo to local. In the main directory run the below commands. This will install playwright dependencies on your machine.:
     
     > npm install
     > 
-- For first time installation use below command to download required browsers:
+- For execution all the test cases:
     
-    > npx playwright install
+    > npm run test
     > 
+- To open last HTML report run::
+    
+    > npm run report
+    > 
+- Or If you want to run this in with github action then navigate to the actions tab open a build and click on the "Re-run all the jobs"
+    > Then view the updated report to [github pages](https://sabbir-of.github.io/playwright-report/)
+    >
+
+
 
 ### Usage
+
+### Create a Page Object
+
+1. **Create a Page:**
+   - Inside the `pages` folder, create a new file named `yourPage.page.ts`.
+
+2. **Extend BasePage:**
+   - Ensure `yourPage.page.ts` extends a `BasePage` class that contains common methods or properties shared across different pages.
+
+### Create a Steps File
+
+1. **Create Steps File:**
+   - Inside the `steps` folder, create a new file named `yourTest.steps.ts`.
+
+2. **Define Steps for Tests:**
+   - In `yourTest.steps.ts`, create step definitions that map to the steps in your feature files.
+
+### Create a Feature File
+
+1. **Create Feature File:**
+   - Inside the `features` folder, create a new file named `yourfeature.feature`.
+
+2. **Define Feature and Scenarios:**
+   - Write your feature and scenarios using the Gherkin syntax. Example:
+
 
 1. For Browser Configuration, change required parameters in `playwright.config.ts`.
 2. For execution entire test suite on all available browsers simultaneously execute below command where "ENV" can be "qa" "dev"`Test Cases are present in "tests" folder`:
@@ -132,7 +125,7 @@ Playwright-Framework-Template - This project is based on Microsoft Playwright, w
         - `npm run test:prod`
 
 
-### Run Test
+### Run Test With Custom Command
 
 **Usage**
 

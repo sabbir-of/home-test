@@ -1,13 +1,22 @@
 @products
 Feature: Products
 
-  @add_to_cart
+  @add_to_cart 
   Scenario: User should be able to add a product to the cart
     Given the user is logged in and on Products page
     When the user adds "Sauce Labs Backpack" to the cart
     Then the cart item badge must show correct count of 1
     Then clicking on the product button
 
+  @checkout 
+  Scenario: User should be able to checkout a product
+    Given the user is logged in and on Products page
+    When the user adds "Sauce Labs Backpack" to the cart
+    Given is on the cart page
+    When the user clicks on the `Checkout` button
+    Then the user complete the check process
+    
+    
   @remove_product
   Scenario: User should be able to remove the product from the cart
     Given the user is logged in and on Products page

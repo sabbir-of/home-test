@@ -54,6 +54,16 @@ When('the user clicks on the `Checkout` button', async ({ cartPage }) => {
     await cartPage.doCheckout();
 });
 
+Then('the user complete the check process', async ({ cartPage }) => {
+    await cartPage.inputFirstName("First Name")
+    await cartPage.inputLastName("Last Name")
+    await cartPage.inputZipCode("1320")
+    await cartPage.continueCheckout()    
+    await cartPage.finishCheckout()
+    const textContent = await cartPage.checkoutConfirmation()
+    await expect(textContent).toEqual("Thank you for your order!")
+});
+
 Then('the User should be on Your Information page', async ({ page }) => {
     await expect(page).toHaveURL(/.*checkout-step-one.html/);
 });

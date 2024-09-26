@@ -10,6 +10,14 @@ test.describe("Products", () => {
     await Then("clicking on the product button", null, { productsPage });
   });
 
+  test("User should be able to checkout a product", async ({ Given, page, loginPage, productsPage, When, cartPage, Then }) => {
+    await Given("the user is logged in and on Products page", null, { page, loginPage, productsPage });
+    await When("the user adds \"Sauce Labs Backpack\" to the cart", null, { productsPage });
+    await Given("is on the cart page", null, { page, productsPage });
+    await When("the user clicks on the `Checkout` button", null, { cartPage });
+    await Then("the user complete the check process", null, { cartPage });
+  });
+
   test("User should be able to remove the product from the cart", async ({ Given, page, loginPage, productsPage, When, Then }) => {
     await Given("the user is logged in and on Products page", null, { page, loginPage, productsPage });
     await When("the user adds \"Sauce Labs Bike Light\" to the cart", null, { productsPage });
@@ -63,10 +71,11 @@ test.use({
 
 const testMetaMap = {
   "User should be able to add a product to the cart": {"pickleLocation":"5:3","tags":["@products","@add_to_cart"],"ownTags":["@add_to_cart"]},
-  "User should be able to remove the product from the cart": {"pickleLocation":"12:3","tags":["@products","@remove_product"],"ownTags":["@remove_product"]},
-  "User should be able to log out": {"pickleLocation":"19:3","tags":["@products","@logout"],"ownTags":["@logout"]},
-  "Social Media links in footer should work|Example #1": {"pickleLocation":"32:7","tags":["@products","@footer","@social_media_links"]},
-  "Social Media links in footer should work|Example #2": {"pickleLocation":"33:7","tags":["@products","@footer","@social_media_links"]},
-  "Social Media links in footer should work|Example #3": {"pickleLocation":"34:7","tags":["@products","@footer","@social_media_links"]},
-  "Copyright text in footer should be visible": {"pickleLocation":"37:3","tags":["@products","@footer","@copyright"],"ownTags":["@copyright","@footer"]},
+  "User should be able to checkout a product": {"pickleLocation":"12:3","tags":["@products","@checkout"],"ownTags":["@checkout"]},
+  "User should be able to remove the product from the cart": {"pickleLocation":"21:3","tags":["@products","@remove_product"],"ownTags":["@remove_product"]},
+  "User should be able to log out": {"pickleLocation":"28:3","tags":["@products","@logout"],"ownTags":["@logout"]},
+  "Social Media links in footer should work|Example #1": {"pickleLocation":"41:7","tags":["@products","@footer","@social_media_links"]},
+  "Social Media links in footer should work|Example #2": {"pickleLocation":"42:7","tags":["@products","@footer","@social_media_links"]},
+  "Social Media links in footer should work|Example #3": {"pickleLocation":"43:7","tags":["@products","@footer","@social_media_links"]},
+  "Copyright text in footer should be visible": {"pickleLocation":"46:3","tags":["@products","@footer","@copyright"],"ownTags":["@copyright","@footer"]},
 };
