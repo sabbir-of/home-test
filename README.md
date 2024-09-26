@@ -34,30 +34,6 @@ Home Test - This project is based on Microsoft Playwright, which enables reliabl
 
 ## Getting Started
 
-## Project Structure
-**Project Structure**
-
-/project-root
-│
-├── /fixtures
-│   └── BDDFixture.ts
-│
-├── /pages
-│   └── yourPage.page.ts
-│
-├── /helpers
-│   └── webHelper.ts
-│
-├── /features
-│   └── yourFeature.feature
-│
-├── /steps
-│   └── yourTest.steps.ts
-│
-└── /utils
-    └── additionalHelpers.ts
-
-
 
 ### Prerequisite
 
@@ -65,7 +41,7 @@ Home Test - This project is based on Microsoft Playwright, which enables reliabl
   > `https://nodejs.org/en/download`
 - `Visual Studio Code/Aqua/IntelliJ`: Download and install code editor
 
-### Installation
+### Installation & Execution
 
 - - clone the repo using below URL
     
