@@ -40,22 +40,22 @@ Home Test - This project is based on Microsoft Playwright, which enables reliabl
 /project-root
 │
 ├── /fixtures
-│   └── BDDFixture.ts            # Setup and teardown logic for BDD tests
+│   └── BDDFixture.ts
 │
 ├── /pages
-│   └── yourPage.page.ts         # Page object extending BasePage with shared methods
+│   └── yourPage.page.ts
 │
 ├── /helpers
-│   └── webHelper.ts             # Helper functions for various utilities in tests
+│   └── webHelper.ts
 │
 ├── /features
-│   └── yourFeature.feature       # Gherkin feature file defining scenarios
+│   └── yourFeature.feature
 │
 ├── /steps
-│   └── yourTest.steps.ts        # Step definitions mapping to feature file steps
+│   └── yourTest.steps.ts
 │
 └── /utils
-    └── additionalHelpers.ts      # Additional utility functions, if needed
+    └── additionalHelpers.ts
 
 
 
