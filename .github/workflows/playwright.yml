@@ -38,7 +38,7 @@ jobs:
           git config --global user.email "sabbir.of@gmail.com"
           
           # Clone the target repo
-          git clone --branch gh-pages https://github.com/sabbir.of/playwright-report.git gh-pages-repo/
+          git clone --branch gh-pages https://github.com/sabbir-of/playwright-report.git gh-pages-repo/
           
           # Copy the report to the target repo
           cp -r ${{ github.workspace }}/generated-report/* gh-pages-repo/  # Adjust the path to your report
