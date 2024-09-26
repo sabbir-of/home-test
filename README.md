@@ -46,16 +46,17 @@ Home Test - This project is based on Microsoft Playwright, which enables reliabl
 │   └── yourPage.page.ts         # Page object extending BasePage with shared methods
 │
 ├── /helpers
-│   └── webhelper.ts             # Helper functions for various utilities in tests
+│   └── webHelper.ts             # Helper functions for various utilities in tests
 │
 ├── /features
-│   └── yourfeature.feature       # Gherkin feature file defining scenarios
+│   └── yourFeature.feature       # Gherkin feature file defining scenarios
 │
 ├── /steps
 │   └── yourTest.steps.ts        # Step definitions mapping to feature file steps
 │
 └── /utils
-    └── additionalHelpers.ts      # Optional: Additional utility functions if needed
+    └── additionalHelpers.ts      # Additional utility functions, if needed
+
 
 
 ### Prerequisite
