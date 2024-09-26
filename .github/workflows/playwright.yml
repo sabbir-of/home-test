@@ -39,6 +39,9 @@ jobs:
           
           # Clone the target repo
           git clone --branch gh-pages https://github.com/sabbir-of/playwright-report.git gh-pages-repo/
+
+          # Remove existing files in the target repo to avoid conflicts
+          rm -rf gh-pages-repo/*
           
           # Copy the report to the target repo
           cp -r ${{ github.workspace }}/generated-report/* gh-pages-repo/  # Adjust the path to your report
