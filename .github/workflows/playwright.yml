@@ -1,58 +1,70 @@
-name: Publish Report to gh-pages
+name: Publish Playwright Test Report 
 
 on:
   push:
     branches:
-      - main  # Change this to your main branch if it's different
+      - main
+  schedule:
+    - cron: '00 17 * * 1-5'
 
 jobs:
   build:
     runs-on: windows-latest
-    
+
     steps:
-      - name: Checkout repository
-        uses: actions/checkout@v2
+      - name: Checkout Repository
+        uses: actions/checkout@v3
 
       - name: Set up Node.js
-        uses: actions/setup-node@v2
+        uses: actions/setup-node@v3
         with:
-          node-version: '16'  # Specify your Node.js version
+          node-version: 18
 
-      - name: Install dependencies
-        run: |
-          npm install          
+      - name: Install Dependencies
+        run: npm install
 
       - name: Run Playwright Tests
-        run: |
-          npm run test  # Generate the report in HTML format
-      
-      - name: Copy contents of playwright-report
+        run: npm run test
+
+      - name: Copy Contents of Playwright Report
         if: always()
         run: |
-              mkdir -p generated-report
-              cp -r ${{ github.workspace }}/playwright-report/* generated-report/
-
-      - name: Publish Report to gh-pages
+          mkdir -p ${{ github.workspace }}/generated-report
+          cp -r ${{ github.workspace }}/playwright-report/* ${{ github.workspace }}/generated-report/
+      
+      - name: Clone Target Repository
+        if: always()
         run: |
-          git config --global user.name "sabbir-of"
-          git config --global user.email "sabbir.of@gmail.com"
-          
-          # Clone the target repo
-          git clone --branch gh-pages https://github.com/sabbir-of/PlaywrightReport.git gh-pages-repo/
+          git clone https://x-access-token:${{ secrets.GH_TOKEN }}@github.com/sabbir-of/PlaywrightReport.git gh-pages-repo
 
-          # Remove existing files in the target repo to avoid conflicts
-          Remove-Item -Recurse -Force gh-pages-repo/*
+      - name: Clean Up Existing Files
+        if: always()
+        run: |
+          cd gh-pages-repo
+          git rm -rf . || true
 
-          # Copy the report to the target repo
-          cp -r ${{ github.workspace }}/generated-report/* gh-pages-repo/ 
+      - name: Configure Git User and Handle Line Endings
+        if: always()
+        working-directory: gh-pages-repo
+        run: |
+          git config user.name "GitHub Actions"
+          git config user.email "sabbir.of@gmail.com"
+          git config core.autocrlf true
 
-          # Change to the target repo directory
-          cd gh-pages-repo/
+      - name: Checkout gh-pages Branch
+        working-directory: gh-pages-repo
+        run: |
+            git checkout gh-pages || git checkout -b gh-pages
 
-          # Check if the gh-pages branch exists; if not, create it
-          git checkout -B gh-pages
+      - name: Copy New Report
+        if: always()
+        run: |
+          cp -r ${{ github.workspace }}/generated-report/* gh-pages-repo/
 
-          # Add, commit and push changes
+      - name: Commit and Push Changes
+        if: always()
+        working-directory: gh-pages-repo
+        run: |
           git add .
-          git commit -m "Update report" || echo "No changes to commit"
-          git push --force https://x-access-token:${{ secrets.GH_TOKEN }}@github.com/sabbir-of/PlaywrightReport.git gh-pages:gh-pages
+          git commit -m "Update Playwright report" || echo "No changes to commit"
+          git push -u https://x-access-token:${{ secrets.GH_TOKEN }}@github.com/sabbir-of/PlaywrightReport.git gh-pages --force
