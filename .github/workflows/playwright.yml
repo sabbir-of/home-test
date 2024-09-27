@@ -35,7 +35,7 @@ jobs:
       - name: Clone Target Repository
         if: always()
         run: |
-          git clone https://x-access-token:${{ secrets.GH_TOKEN }}@github.com/sabbir-of/PlaywrightReport.git gh-pages-repo
+          git clone https://x-access-token:${{ secrets.GH_TOKEN }}@github.com/sabbir-of/playwright-report.git gh-pages-repo
 
       - name: Clean Up Existing Files
         if: always()
@@ -67,4 +67,4 @@ jobs:
         run: |
           git add .
           git commit -m "Update Playwright report" || echo "No changes to commit"
-          git push -u https://x-access-token:${{ secrets.GH_TOKEN }}@github.com/sabbir-of/PlaywrightReport.git gh-pages --force
+          git push -u https://x-access-token:${{ secrets.GH_TOKEN }}@github.com/sabbir-of/playwright-report.git gh-pages --force
